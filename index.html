@@ -1,13 +1,15 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Mobile-Optimized Viewport prevents unwanted zooming and scaling glitches -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>A Letter for Sanyukta</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,400&display=swap" rel="stylesheet">
     <style>
         /* 
-         * 🌹 ROMANTIC SUNSET ROSES THEME 🌹
+         * 🌹 MOBILE-OPTIMIZED ROMANTIC SUNSET ROSES THEME 🌹
          */
         :root {
             --sunset-gold: #e6b87d;
@@ -16,6 +18,10 @@
             --glass-border: rgba(230, 184, 125, 0.55);
             --parchment-ink: #fff6ee;
             --rose-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            
+            /* Safe area padding for modern bezel-less phones */
+            --safe-top: env(safe-area-inset-top, 0px);
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
         }
 
         * {
@@ -27,42 +33,45 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        html, body {
+            width: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            background-color: #12090b;
+        }
+
         body {
             font-family: 'Cormorant Garamond', serif;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100dvh; 
-            overflow: hidden;
-            background-color: #12090b;
+            /* Mobile background rendering optimization */
             background-image: url('The Roses.jpg'); 
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
-            background-attachment: fixed;
+            position: relative;
         }
 
         body::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(35, 18, 12, 0.1) 0%, rgba(15, 6, 8, 0.55) 100%);
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(35, 18, 12, 0.1) 0%, rgba(15, 6, 8, 0.65) 100%);
             z-index: 0;
             pointer-events: none;
         }
 
-        /* 60FPS GPU-ACCELERATED FLOWER SHOWER */
+        /* GPU-ACCELERATED MOBILE FLOWER SHOWER */
         #flower-container {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100dvh;
+            inset: 0;
             pointer-events: none; 
             z-index: 5;
             opacity: 0; 
             transition: opacity 1.5s ease-in-out;
+            overflow: hidden;
         }
 
         .flower {
@@ -70,7 +79,8 @@
             top: -10%;
             will-change: transform, opacity;
             animation: floatFall linear forwards;
-            filter: drop-shadow(0 0 6px rgba(228, 150, 130, 0.5));
+            filter: drop-shadow(0 0 5px rgba(228, 150, 130, 0.4));
+            transform: translateZ(0); /* Hardware acceleration trigger */
         }
 
         @keyframes floatFall {
@@ -78,120 +88,121 @@
                 transform: translate3d(0, 0, 0) rotate(0deg) scale(0.8);
                 opacity: 0;
             }
-            10% {
-                opacity: 1;
-            }
-            50% {
-                transform: translate3d(35px, 55vh, 0) rotate(180deg) scale(1);
-            }
-            90% {
-                opacity: 0.9;
-            }
+            10% { opacity: 1; }
+            50% { transform: translate3d(25px, 50vh, 0) rotate(180deg) scale(1); }
+            90% { opacity: 0.9; }
             100% {
-                transform: translate3d(-20px, 112vh, 0) rotate(360deg) scale(0.9);
+                transform: translate3d(-15px, 105vh, 0) rotate(360deg) scale(0.85);
                 opacity: 0;
             }
         }
 
         /* WELCOME SCREEN */
         #welcome-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100dvh;
-            background: radial-gradient(circle at center, rgba(28, 14, 18, 0.94) 0%, rgba(10, 4, 6, 0.98) 100%);
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(28, 14, 18, 0.96) 0%, rgba(10, 4, 6, 0.99) 100%);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 100;
-            transition: opacity 1.2s ease-in-out;
+            transition: opacity 0.8s ease-out;
+            padding: calc(20px + var(--safe-top)) 24px calc(20px + var(--safe-bottom)) 24px;
+            text-align: center;
         }
 
         .novel-title {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 24px;
+            font-size: clamp(20px, 5.5vw, 26px);
             font-weight: 700;
-            margin-bottom: 35px;
+            margin-bottom: 16px;
             color: var(--sunset-gold);
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             text-shadow: 0 0 20px rgba(230, 184, 125, 0.5);
-            text-align: center;
-            padding: 0 20px;
-            line-height: 1.4;
+            line-height: 1.35;
+        }
+
+        #welcome-screen p {
+            color: var(--parchment-ink);
+            opacity: 0.8;
+            font-size: clamp(13px, 3.5vw, 15px);
+            margin-bottom: 32px;
+            font-style: italic;
         }
 
         #start-btn {
-            padding: 16px 40px;
+            min-height: 48px; /* Accessible Mobile Touch Target */
+            padding: 14px 36px;
             font-family: 'Cinzel Decorative', serif;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             color: #12070a;
             background: linear-gradient(135deg, #fce3c7 0%, #d99a5b 100%);
             border: 1px solid #ffebd6;
             border-radius: 50px;
             cursor: pointer;
-            box-shadow: 0 0 30px rgba(217, 154, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.8);
-            transition: all 0.4s ease;
+            box-shadow: 0 0 25px rgba(217, 154, 91, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.8);
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
+            touch-action: manipulation;
         }
 
         #start-btn:active {
-            transform: scale(0.94);
-            box-shadow: 0 0 15px rgba(217, 154, 91, 0.6);
+            transform: scale(0.95);
+            box-shadow: 0 0 12px rgba(217, 154, 91, 0.6);
         }
 
-        /* 3D GLASS CARD & SCENE */
+        /* 3D SCENE & RESPONSIVE CARD */
         .scene {
-            width: 250px;
-            height: 350px;
-            perspective: 1200px;
+            width: min(82vw, 280px);
+            height: min(118vw, 410px);
+            perspective: 1000px;
             opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-            cursor: pointer;
+            transition: opacity 1.2s ease-in-out;
             z-index: 10;
-            margin-top: 80px; 
+            margin-bottom: calc(15px + var(--safe-bottom));
         }
 
         .card {
             width: 100%;
             height: 100%;
             position: relative;
-            transform: scale(0.78);
-            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
             transform-style: preserve-3d;
+            transition: transform 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             will-change: transform;
         }
 
         .card.is-flipped {
-            transform: rotateY(-180deg) scale(1.15);
-            cursor: default;
+            transform: rotateY(-180deg);
         }
 
-        /* Glass Face Base */
+        /* Glass Card Faces */
         .card-face {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
+            border: 1.5px solid var(--glass-border);
+            border-radius: 16px;
+            box-shadow: var(--rose-shadow);
+            overflow: hidden;
+            transform: translateZ(0); /* Fixes mobile backface flickering */
+        }
+
+        /* 1st Face: Cover Front */
+        .card-front {
+            background: rgba(28, 14, 18, 0.35);
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+            padding: 20px 16px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border: 1.5px solid var(--glass-border);
-            border-radius: 16px;
-            box-shadow: var(--rose-shadow);
-        }
-
-        /* 1st Face: Fully Transparent Cover */
-        .card-front {
-            background: transparent;
-            -webkit-backdrop-filter: none;
-            backdrop-filter: none;
-            padding: 0 16px;
+            cursor: pointer;
+            touch-action: manipulation;
         }
 
         .card-front::before {
@@ -206,253 +217,230 @@
         .corner-ornament {
             position: absolute;
             color: var(--sunset-gold);
-            font-size: 16px;
-            text-shadow: 0 0 8px var(--rose-gold-glow), 0 2px 4px rgba(0,0,0,0.8);
+            font-size: 14px;
+            text-shadow: 0 0 8px var(--rose-gold-glow);
         }
         .top-left { top: 14px; left: 14px; }
         .bottom-right { bottom: 14px; right: 14px; }
 
         .to-name {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 22px;
+            font-size: clamp(16px, 4.8vw, 20px);
             font-weight: 700;
             color: var(--parchment-ink);
-            text-shadow: 0 0 16px rgba(230, 184, 125, 0.9), 0 2px 8px rgba(0, 0, 0, 0.95);
+            text-shadow: 0 0 14px rgba(230, 184, 125, 0.9), 0 2px 6px rgba(0,0,0,0.9);
             z-index: 2;
             letter-spacing: 1px;
             text-align: center;
+            margin-bottom: 12px;
         }
 
-        .subtitle {
+        .card-front .subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(12.5px, 3.6vw, 14.5px);
+            font-style: italic;
+            color: var(--parchment-ink);
+            z-index: 2;
+            text-align: center;
+            line-height: 1.45;
+            text-shadow: 0 1px 4px rgba(0,0,0,0.9);
+            opacity: 0.92;
+            padding: 0 6px;
+        }
+
+        .instruction {
+            position: absolute;
+            bottom: 20px;
             font-family: 'Playfair Display', serif;
             font-size: 11px;
             font-style: italic;
-            color: var(--rose-gold-glow);
+            color: var(--sunset-gold);
             z-index: 2;
-            margin-top: 8px;
-            text-align: center;
             letter-spacing: 0.5px;
-            line-height: 1.3;
-            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
+            animation: pulseGlow 2s infinite ease-in-out;
+            text-shadow: 0 0 5px rgba(230, 184, 125, 0.5);
         }
 
-        /* PROMINENT "TAP TO UNSEAL" BUTTON */
-        .instruction {
-            position: absolute;
-            bottom: 22px;
-            font-family: 'Playfair Display', serif;
-            font-size: 11.5px;
-            font-style: italic;
-            font-weight: 600;
-            color: #fff6ee;
-            background: rgba(35, 18, 22, 0.75);
-            padding: 6px 18px;
-            border-radius: 20px;
-            border: 1px solid var(--sunset-gold);
-            box-shadow: 0 0 15px rgba(230, 184, 125, 0.4);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            z-index: 2;
-            letter-spacing: 1.2px;
-            animation: pulseGlow 2.2s infinite ease-in-out;
-        }
-
-        /* Back Face Content (Letter view) */
+        /* 2nd Face: Letter Back */
         .card-back {
-            transform: rotateY(180deg);
-            background: rgba(28, 16, 18, 0.68);
+            transform: rotateY(-180deg);
+            background: rgba(24, 12, 15, 0.92);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
             backdrop-filter: blur(16px) saturate(180%);
-            padding: 20px 16px 18px 16px;
-            justify-content: flex-start;
-            overflow-y: auto;
-            scrollbar-width: none;
-            scroll-behavior: smooth;
+            display: flex;
+            flex-direction: column;
+            pointer-events: none;
+        }
+        
+        .card.is-flipped .card-back {
+            pointer-events: auto;
         }
 
-        .card-back::-webkit-scrollbar {
+        /* Touch-optimized Scrollable Container */
+        .card-back-scroll {
+            flex: 1;
+            width: 100%;
+            overflow-y: auto;
+            padding: 22px 18px 10px 18px;
+            -webkit-overflow-scrolling: touch; /* Native iOS Momentum Scroll */
+            touch-action: pan-y;
+            scrollbar-width: none;
+        }
+
+        .card-back-scroll::-webkit-scrollbar {
             display: none;
         }
 
         .confession-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 14.5px;
-            line-height: 1.6;
+            font-size: clamp(14px, 3.8vw, 15.5px);
+            line-height: 1.65;
             color: var(--parchment-ink);
             text-align: left;
-            width: 100%;
-            font-weight: 600;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
+            font-weight: 500;
         }
 
         .line {
             margin-bottom: 12px;
             display: block;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
         }
 
         .line:first-child::first-letter {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 30px;
+            font-size: 28px;
             color: var(--sunset-gold);
             float: left;
             line-height: 0.8;
             margin-right: 6px;
             margin-top: 2px;
-            text-shadow: 0 0 10px rgba(230, 184, 125, 0.7);
+            text-shadow: 0 0 8px rgba(230, 184, 125, 0.7);
         }
 
-        /* SPECIAL HIGHLIGHT FOR PROPOSAL LINES */
         .proposal-box {
-            margin-top: 16px;
-            margin-bottom: 12px;
-            padding: 12px 14px;
-            background: linear-gradient(135deg, rgba(230, 184, 125, 0.18) 0%, rgba(244, 195, 178, 0.12) 100%);
-            border: 1px solid rgba(230, 184, 125, 0.6);
+            margin: 16px 0 10px 0;
+            padding: 12px;
+            background: linear-gradient(135deg, rgba(230, 184, 125, 0.15) 0%, rgba(244, 195, 178, 0.08) 100%);
+            border: 1px solid rgba(230, 184, 125, 0.4);
             border-radius: 10px;
-            box-shadow: 0 0 15px rgba(230, 184, 125, 0.25);
-            position: relative;
             text-align: center;
         }
 
         .proposal-line {
             font-family: 'Playfair Display', serif;
-            font-size: 15px;
+            font-size: clamp(13px, 3.6vw, 14.5px);
             font-style: italic;
             font-weight: 600;
             color: #ffe8d6;
             line-height: 1.5;
             display: block;
-            text-shadow: 0 0 10px rgba(230, 184, 125, 0.8);
+            text-shadow: 0 0 8px rgba(230, 184, 125, 0.8);
         }
 
         .proposal-symbol {
             display: block;
-            font-size: 14px;
+            font-size: 15px;
             color: var(--sunset-gold);
             margin-bottom: 4px;
         }
 
-        /* Back Cover Seal Button */
+        /* Fixed Button Area */
         .home-btn-container {
             width: 100%;
+            padding: 10px 16px 16px 16px;
             display: flex;
             justify-content: center;
-            margin-top: 14px;
-            margin-bottom: 8px;
+            background: linear-gradient(to top, rgba(24, 12, 15, 1) 80%, rgba(24, 12, 15, 0));
+            z-index: 10;
         }
 
         #home-btn {
-            padding: 8px 20px;
+            min-height: 44px; /* Accessible Touch Target */
+            min-width: 140px;
+            padding: 10px 24px;
             font-family: 'Cinzel Decorative', serif;
-            font-size: 10px;
+            font-size: 10.5px;
             font-weight: 700;
             color: var(--parchment-ink);
-            background: linear-gradient(135deg, rgba(217, 154, 91, 0.35) 0%, rgba(60, 25, 30, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(217, 154, 91, 0.45) 0%, rgba(60, 25, 30, 0.85) 100%);
             border: 1px solid var(--sunset-gold);
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(230, 184, 125, 0.2);
-            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.15s ease;
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1.2px;
+            touch-action: manipulation;
         }
 
         #home-btn:active {
-            transform: scale(0.92);
-            background: rgba(217, 154, 91, 0.5);
+            transform: scale(0.94);
+            background: rgba(217, 154, 91, 0.65);
         }
 
-        /* NO-STYLE UNADORNED FOOTER */
         footer {
-            position: absolute;
-            bottom: 10px;
+            position: fixed;
+            bottom: calc(6px + var(--safe-bottom));
             width: 100%;
             text-align: center;
-            font-family: sans-serif;
-            font-size: 11px;
-            color: rgba(255, 255, 255, 0.5);
-            z-index: 20;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 8.5px;
+            color: rgba(255, 255, 255, 0.45);
+            z-index: 2;
             pointer-events: none;
+            padding: 0 16px;
+            line-height: 1.3;
         }
 
         @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 10px rgba(230, 184, 125, 0.3); }
-            50% { transform: scale(1.04); box-shadow: 0 0 20px rgba(230, 184, 125, 0.7); }
-        }
-
-        @media screen and (max-width: 380px) {
-            .scene {
-                width: 230px;
-                height: 330px;
-                margin-top: 80px;
-            }
-            .card {
-                transform: scale(0.72);
-            }
-            .card.is-flipped {
-                transform: rotateY(-180deg) scale(1.12);
-            }
-            .to-name {
-                font-size: 19px;
-            }
-            .subtitle {
-                font-size: 10px;
-            }
-            .confession-text {
-                font-size: 13.5px;
-            }
-            .proposal-line {
-                font-size: 13.5px;
-            }
+            0%, 100% { transform: scale(1); opacity: 0.85; }
+            50% { transform: scale(1.04); opacity: 1; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Background Music Audio -->
     <audio id="bg-music" src="every-moment-roman-main-version-49472-01-31.mp3" loop preload="auto"></audio>
 
     <div id="flower-container"></div>
 
-    <!-- Entrance Screen -->
+    <!-- Mobile Entrance Screen -->
     <div id="welcome-screen">
-        <div class="novel-title">A beautiful santuary<br>hope you like it.</div>
+        <div class="novel-title">A beautiful sanctuary<br>hope you like it.</div>
+        <p>Don't forget to turn your phone volume up</p>
         <button id="start-btn">Tap and let's dive in</button>
-        <p>Dont forget to turn your phone volume up</p>
     </div>
 
-    <!-- Interactive Card Scene -->
+    <!-- 3D Card Scene -->
     <div class="scene" id="card-scene">
         <div class="card" id="the-card">
             
-            <!-- 1st Face (Fully Transparent Cover) -->
-            <div class="card-face card-front">
+            <!-- Cover Face -->
+            <div class="card-face card-front" id="card-front-tap">
                 <span class="corner-ornament top-left">✧</span>
                 <div class="to-name">Just for you SANYUKTA</div>
-                <div class="subtitle">Sanyukta... I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.</div>
+                <div class="subtitle">I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.</div>
                 <div class="instruction">Tap to Unseal my confession</div>
                 <span class="corner-ornament bottom-right">✧</span>
             </div>
 
-            <!-- 2nd Face (Full Letter + Highlighted Proposal) -->
-            <div class="card-face card-back" id="card-back-face">
-                <div class="confession-text">
-                    <span class="line">Our first meeting was unforgettable, but that second time we met... that just felt like destiny.</span>
-                    <span class="line">I know I’m far from perfect, and I know I might not be your first chapter.</span>
-                    <span class="line">But this sacred connection we have is something I want to protect with everything I have.</span>
-                    <span class="line">I’ve built this quiet beautiful garden right here on the left side of my chest, and I just want to fill it with your happiness.</span>
-                    <span class="line">Instead, since today is Girlfriend’s Day, I just wanted to leave this here for you to ask...</span>
-                    
-                    <!-- Highlighted Final Proposal Section -->
-                    <div class="proposal-box">
-                        <span class="proposal-symbol">♛</span>
-                        <span class="proposal-line">Will you be my one and only princess?</span>
-                        <span class="proposal-line">The only ladylove to claim my heart?</span>
+            <!-- Letter Back Face -->
+            <div class="card-face card-back">
+                <div class="card-back-scroll" id="card-scroll-container">
+                    <div class="confession-text">
+                        <span class="line">Sanyukta, I may not be your first love not perfect but I will try my best to always keep you happy</span>
+                        <span class="line">But this sacred connection we have is something I want to protect with everything I have.</span>
+                        <span class="line">I’ve built this quiet beautiful garden right here on the left side of my chest, and I just want to fill it with your happiness.</span>
+                        <span class="line">Instead, since today is Girlfriend’s Day, I just wanted to leave this here for you to ask...</span>
+                        
+                        <div class="proposal-box">
+                            <span class="proposal-symbol">♛</span>
+                            <span class="proposal-line">Will you be my one and only princess?<br>The one and only ladylove </span>
+                            
+                        </div>
                     </div>
                 </div>
-
-                <!-- Unflip/Close Cover Button -->
+                
                 <div class="home-btn-container">
                     <button id="home-btn">Close Card</button>
                 </div>
@@ -461,50 +449,52 @@
         </div>
     </div>
 
-    <!-- Minimal Unstyled Footer -->
-    <footer>@ copy. Non-commercial. A letter for ypu Sanyukta. Designed & Developed by Sohan. Dedicated to Sanyukta. Privacy maintained. Made with ❤️</footer>
+    <footer>@copy 2026 Non-commercial. Designed & Developed by Sohan. Dedicated to Sanyukta. Privacy maintained. Made with ❤️</footer>
 
     <script>
         const welcomeScreen = document.getElementById('welcome-screen');
         const startBtn = document.getElementById('start-btn');
         const cardScene = document.getElementById('card-scene');
         const theCard = document.getElementById('the-card');
+        const frontTapArea = document.getElementById('card-front-tap');
         const homeBtn = document.getElementById('home-btn');
+        const scrollContainer = document.getElementById('card-scroll-container');
         const flowerContainer = document.getElementById('flower-container');
-        const cardBackFace = document.getElementById('card-back-face');
         const bgMusic = document.getElementById('bg-music');
 
-        let hasFlipped = false;
+        let isFlipped = false;
         let showerInterval = null;
 
-        // Smooth Petals Engine
+        // Mobile-Throttled Particle Engine
         function startFlowerShower() {
             flowerContainer.style.opacity = '1';
-            const elements = ['🌹', '✨', '🥀', '✧', '✦']; 
+            const elements = ['🌹', '✨', '🥀', '✧']; 
 
             if (showerInterval) return;
 
+            // Frequency adjusted to preserve 60fps on lower-end mobile processors
             showerInterval = setInterval(() => {
                 const flower = document.createElement('div');
                 flower.className = 'flower';
                 flower.innerText = elements[Math.floor(Math.random() * elements.length)];
                 
-                flower.style.left = (Math.random() * 92 + 4) + 'vw';
-                flower.style.animationDuration = (Math.random() * 4 + 7) + 's'; 
-                flower.style.fontSize = (Math.random() * 8 + 12) + 'px';
+                flower.style.left = (Math.random() * 90 + 5) + 'vw';
+                flower.style.animationDuration = (Math.random() * 3 + 6) + 's'; 
+                flower.style.fontSize = (Math.random() * 6 + 12) + 'px';
                 
                 flowerContainer.appendChild(flower);
                 
                 setTimeout(() => {
                     flower.remove();
-                }, 11000);
-            }, 280); 
+                }, 9000);
+            }, 380); 
         }
 
-        // 1. Entrance Trigger
-        startBtn.addEventListener('click', () => {
-            bgMusic.volume = 0.8;
-            bgMusic.play().catch(e => console.log("Audio play deferred", e));
+        // Entrance Handler
+        startBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            bgMusic.volume = 0.5;
+            bgMusic.play().catch(err => console.log("Audio play deferred:", err));
 
             startFlowerShower();
 
@@ -512,27 +502,31 @@
             setTimeout(() => {
                 welcomeScreen.style.display = 'none';
                 cardScene.style.opacity = '1';
-            }, 1200);
+            }, 800);
         });
 
-        // 2. Card Unseal (Open Card)
-        theCard.addEventListener('click', (e) => {
-            if (e.target.id === 'home-btn' || hasFlipped) return; 
-            hasFlipped = true;
+        // Open Card
+        frontTapArea.addEventListener('click', () => {
+            if (isFlipped) return; 
+            isFlipped = true;
             theCard.classList.add('is-flipped');
         });
 
-        // 3. Return to Cover Front Page (Unflips Card)
-        homeBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); 
+        // Close Card (Unflip)
+        function closeCard(e) {
+            e.stopPropagation();
+            if (e.type === 'touchstart') e.preventDefault();
             
             theCard.classList.remove('is-flipped');
-            hasFlipped = false;
+            isFlipped = false;
 
             setTimeout(() => {
-                cardBackFace.scrollTop = 0;
+                scrollContainer.scrollTop = 0;
             }, 800);
-        });
+        }
+
+        homeBtn.addEventListener('click', closeCard);
+        homeBtn.addEventListener('touchstart', closeCard, { passive: false });
     </script>
 </body>
 </html>
