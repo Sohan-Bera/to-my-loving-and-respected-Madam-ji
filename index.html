@@ -78,9 +78,15 @@
                 transform: translate3d(0, 0, 0) rotate(0deg) scale(0.8);
                 opacity: 0;
             }
-            10% { opacity: 1; }
-            50% { transform: translate3d(35px, 55vh, 0) rotate(180deg) scale(1); }
-            90% { opacity: 0.9; }
+            10% {
+                opacity: 1;
+            }
+            50% {
+                transform: translate3d(35px, 55vh, 0) rotate(180deg) scale(1);
+            }
+            90% {
+                opacity: 0.9;
+            }
             100% {
                 transform: translate3d(-20px, 112vh, 0) rotate(360deg) scale(0.9);
                 opacity: 0;
@@ -144,6 +150,7 @@
             perspective: 1200px;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
+            cursor: pointer;
             z-index: 10;
             margin-top: 80px; 
         }
@@ -160,6 +167,7 @@
 
         .card.is-flipped {
             transform: rotateY(-180deg) scale(1.15);
+            cursor: default;
         }
 
         /* Glass Face Base */
@@ -169,6 +177,10 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             border: 1.5px solid var(--glass-border);
             border-radius: 16px;
             box-shadow: var(--rose-shadow);
@@ -180,11 +192,6 @@
             -webkit-backdrop-filter: none;
             backdrop-filter: none;
             padding: 0 16px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
         }
 
         .card-front::before {
@@ -250,27 +257,20 @@
             animation: pulseGlow 2.2s infinite ease-in-out;
         }
 
-        /* Back Face Layout Structure */
+        /* Back Face Content (Letter view) */
         .card-back {
             transform: rotateY(180deg);
-            background: rgba(28, 16, 18, 0.88);
+            background: rgba(28, 16, 18, 0.68);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
             backdrop-filter: blur(16px) saturate(180%);
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-
-        /* Scrollable Text Body */
-        .card-back-body {
-            flex: 1;
-            padding: 20px 16px 12px 16px;
+            padding: 20px 16px 18px 16px;
+            justify-content: flex-start;
             overflow-y: auto;
             scrollbar-width: none;
             scroll-behavior: smooth;
         }
 
-        .card-back-body::-webkit-scrollbar {
+        .card-back::-webkit-scrollbar {
             display: none;
         }
 
@@ -302,9 +302,9 @@
             text-shadow: 0 0 10px rgba(230, 184, 125, 0.7);
         }
 
-        /* HIGHLIGHT FOR PROPOSAL LINES */
+        /* SPECIAL HIGHLIGHT FOR PROPOSAL LINES */
         .proposal-box {
-            margin-top: 14px;
+            margin-top: 16px;
             margin-bottom: 12px;
             padding: 12px 14px;
             background: linear-gradient(135deg, rgba(230, 184, 125, 0.18) 0%, rgba(244, 195, 178, 0.12) 100%);
@@ -317,7 +317,7 @@
 
         .proposal-line {
             font-family: 'Playfair Display', serif;
-            font-size: 14.5px;
+            font-size: 15px;
             font-style: italic;
             font-weight: 600;
             color: #ffe8d6;
@@ -333,79 +333,26 @@
             margin-bottom: 4px;
         }
 
-        /* ACCEPTANCE CROWN BUTTON */
-        .accept-btn-container {
+        /* Back Cover Seal Button */
+        .home-btn-container {
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-top: 8px;
-            margin-bottom: 4px;
-        }
-
-        #accept-btn {
-            width: 100%;
-            padding: 10px 16px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 11px;
-            font-weight: 700;
-            color: #12070a;
-            background: linear-gradient(135deg, #fce3c7 0%, #d99a5b 100%);
-            border: 1px solid #ffebd6;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(230, 184, 125, 0.5);
-            transition: all 0.3s ease;
-            letter-spacing: 1px;
-        }
-
-        #accept-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* CONFIRMATION OVERLAY AFTER ACCEPTING */
-        .acceptance-msg {
-            display: none;
-            margin-top: 8px;
-            padding: 8px;
-            border-top: 1px dashed var(--sunset-gold);
-            text-align: center;
-            font-family: 'Playfair Display', serif;
-            font-size: 12.5px;
-            font-style: italic;
-            color: var(--sunset-gold);
-            animation: fadeIn 1s forwards;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* FIXED BACK FOOTER BAR (ENSURES CLOSE COVER BUTTON ALWAYS WORKS) */
-        .card-back-footer {
-            height: 48px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(18, 9, 11, 0.85);
-            border-top: 1px solid rgba(230, 184, 125, 0.3);
-            border-bottom-left-radius: 14px;
-            border-bottom-right-radius: 14px;
-            z-index: 100;
+            margin-top: 14px;
+            margin-bottom: 8px;
         }
 
         #home-btn {
-            padding: 7px 20px;
+            padding: 8px 20px;
             font-family: 'Cinzel Decorative', serif;
             font-size: 10px;
             font-weight: 700;
             color: var(--parchment-ink);
-            background: linear-gradient(135deg, rgba(217, 154, 91, 0.45) 0%, rgba(60, 25, 30, 0.85) 100%);
+            background: linear-gradient(135deg, rgba(217, 154, 91, 0.35) 0%, rgba(60, 25, 30, 0.7) 100%);
             border: 1px solid var(--sunset-gold);
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(230, 184, 125, 0.2);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -413,24 +360,7 @@
 
         #home-btn:active {
             transform: scale(0.92);
-            background: rgba(217, 154, 91, 0.7);
-        }
-
-        /* ACCEPTED STATUS BADGE ON COVER */
-        .crown-status-badge {
-            display: none;
-            position: absolute;
-            top: 45px;
-            font-family: 'Cinzel Decorative', serif;
-            font-size: 10px;
-            color: var(--sunset-gold);
-            background: rgba(35, 18, 22, 0.85);
-            padding: 4px 12px;
-            border-radius: 12px;
-            border: 1px solid var(--sunset-gold);
-            box-shadow: 0 0 10px rgba(230, 184, 125, 0.4);
-            letter-spacing: 1px;
-            z-index: 10;
+            background: rgba(217, 154, 91, 0.5);
         }
 
         /* NO-STYLE UNADORNED FOOTER */
@@ -457,12 +387,24 @@
                 height: 330px;
                 margin-top: 80px;
             }
-            .card { transform: scale(0.72); }
-            .card.is-flipped { transform: rotateY(-180deg) scale(1.12); }
-            .to-name { font-size: 19px; }
-            .subtitle { font-size: 10px; }
-            .confession-text { font-size: 13.5px; }
-            .proposal-line { font-size: 13.5px; }
+            .card {
+                transform: scale(0.72);
+            }
+            .card.is-flipped {
+                transform: rotateY(-180deg) scale(1.12);
+            }
+            .to-name {
+                font-size: 19px;
+            }
+            .subtitle {
+                font-size: 10px;
+            }
+            .confession-text {
+                font-size: 13.5px;
+            }
+            .proposal-line {
+                font-size: 13.5px;
+            }
         }
     </style>
 </head>
@@ -475,8 +417,9 @@
 
     <!-- Entrance Screen -->
     <div id="welcome-screen">
-        <div class="novel-title">A Tale Waiting<br>to be Read</div>
-        <button id="start-btn">Break the Seal</button>
+        <div class="novel-title">A beautiful santuary<br>hope you like it.</div>
+        <button id="start-btn">Tap and let's dive in</button>
+        <p>Dont forget to turn your phone volume up</p>
     </div>
 
     <!-- Interactive Card Scene -->
@@ -484,49 +427,34 @@
         <div class="card" id="the-card">
             
             <!-- 1st Face (Fully Transparent Cover) -->
-            <div class="card-face card-front" id="card-front-face">
+            <div class="card-face card-front">
                 <span class="corner-ornament top-left">✧</span>
-                <div class="crown-status-badge" id="cover-status">👑 ACCEPTED 👑</div>
-                <div class="to-name">FOR SANYUKTA</div>
-                <div class="subtitle">A gentle reminder of how much you mean to me</div>
-                <div class="instruction">Tap to Unseal ✧</div>
+                <div class="to-name">Just for you SANYUKTA</div>
+                <div class="subtitle">Sanyukta... I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.</div>
+                <div class="instruction">Tap to Unseal my confession</div>
                 <span class="corner-ornament bottom-right">✧</span>
             </div>
 
-            <!-- 2nd Face (Full Letter + Proposal + Crown Seal) -->
-            <div class="card-face card-back">
-                <div class="card-back-body" id="card-back-body">
-                    <div class="confession-text">
-                        <span class="line">Sanyukta... I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.</span>
-                        <span class="line">Our first meeting was unforgettable, but that second time we met... that just felt like destiny.</span>
-                        <span class="line">I know I’m far from perfect, and I know I might not be your first chapter.</span>
-                        <span class="line">But this sacred connection we have is something I want to protect with everything I have.</span>
-                        <span class="line">I’ve built this quiet little castle right here on the left side of my chest, and I just want to fill it with your happiness.</span>
-                        <span class="line">I know you aren't big on the traditional 'girlfriend' label, so I won't use it.</span>
-                        <span class="line">Instead, since today is Girlfriend’s Day, I just wanted to leave this here for you to ask...</span>
-                        
-                        <!-- Highlighted Proposal Section -->
-                        <div class="proposal-box">
-                            <span class="proposal-symbol">♛</span>
-                            <span class="proposal-line">Will you be my one and only princess?</span>
-                            <span class="proposal-line">The only ladylove to claim my heart?</span>
-                        </div>
-
-                        <!-- Acceptance Seal Button -->
-                        <div class="accept-btn-container">
-                            <button id="accept-btn">Claim Your Crown 👑</button>
-                        </div>
-
-                        <!-- Post Acceptance Message -->
-                        <div class="acceptance-msg" id="acceptance-msg">
-                            ✨ Your place in my heart is sealed forever. ✨
-                        </div>
+            <!-- 2nd Face (Full Letter + Highlighted Proposal) -->
+            <div class="card-face card-back" id="card-back-face">
+                <div class="confession-text">
+                    <span class="line">Our first meeting was unforgettable, but that second time we met... that just felt like destiny.</span>
+                    <span class="line">I know I’m far from perfect, and I know I might not be your first chapter.</span>
+                    <span class="line">But this sacred connection we have is something I want to protect with everything I have.</span>
+                    <span class="line">I’ve built this quiet beautiful garden right here on the left side of my chest, and I just want to fill it with your happiness.</span>
+                    <span class="line">Instead, since today is Girlfriend’s Day, I just wanted to leave this here for you to ask...</span>
+                    
+                    <!-- Highlighted Final Proposal Section -->
+                    <div class="proposal-box">
+                        <span class="proposal-symbol">♛</span>
+                        <span class="proposal-line">Will you be my one and only princess?</span>
+                        <span class="proposal-line">The only ladylove to claim my heart?</span>
                     </div>
                 </div>
 
-                <!-- Fixed Unflip / Close Cover Footer -->
-                <div class="card-back-footer">
-                    <button id="home-btn">Close Cover ✧</button>
+                <!-- Unflip/Close Cover Button -->
+                <div class="home-btn-container">
+                    <button id="home-btn">Close Card</button>
                 </div>
             </div>
 
@@ -534,45 +462,27 @@
     </div>
 
     <!-- Minimal Unstyled Footer -->
-    <footer>Made with ❤️</footer>
+    <footer>@ copy. Non-commercial. A letter for ypu Sanyukta. Designed & Developed by Sohan. Dedicated to Sanyukta. Privacy maintained. Made with ❤️</footer>
 
     <script>
         const welcomeScreen = document.getElementById('welcome-screen');
         const startBtn = document.getElementById('start-btn');
         const cardScene = document.getElementById('card-scene');
         const theCard = document.getElementById('the-card');
-        const cardFrontFace = document.getElementById('card-front-face');
         const homeBtn = document.getElementById('home-btn');
-        const acceptBtn = document.getElementById('accept-btn');
-        const acceptanceMsg = document.getElementById('acceptance-msg');
-        const coverStatus = document.getElementById('cover-status');
         const flowerContainer = document.getElementById('flower-container');
-        const cardBackBody = document.getElementById('card-back-body');
+        const cardBackFace = document.getElementById('card-back-face');
         const bgMusic = document.getElementById('bg-music');
 
-        let isFlipped = false;
+        let hasFlipped = false;
         let showerInterval = null;
 
-        // Check if already accepted via URL parameter or LocalStorage
-        const urlParams = new URLSearchParams(window.location.search);
-        const isAccepted = urlParams.get('status') === 'accepted' || localStorage.getItem('sanyukta_accepted') === 'true';
-
-        if (isAccepted) {
-            markAsAcceptedUI();
-        }
-
-        function markAsAcceptedUI() {
-            acceptBtn.style.display = 'none';
-            acceptanceMsg.style.display = 'block';
-            coverStatus.style.display = 'inline-block';
-        }
-
-        // Petals Shower Engine
-        function startFlowerShower(extraConfetti = false) {
+        // Smooth Petals Engine
+        function startFlowerShower() {
             flowerContainer.style.opacity = '1';
-            const elements = extraConfetti ? ['👑', '✨', '🌹', '✦', '💖', '✧'] : ['🌹', '✨', '🥀', '✧', '✦']; 
+            const elements = ['🌹', '✨', '🥀', '✧', '✦']; 
 
-            if (showerInterval) clearInterval(showerInterval);
+            if (showerInterval) return;
 
             showerInterval = setInterval(() => {
                 const flower = document.createElement('div');
@@ -580,23 +490,23 @@
                 flower.innerText = elements[Math.floor(Math.random() * elements.length)];
                 
                 flower.style.left = (Math.random() * 92 + 4) + 'vw';
-                flower.style.animationDuration = (Math.random() * 3 + 5) + 's'; 
-                flower.style.fontSize = (Math.random() * 10 + 14) + 'px';
+                flower.style.animationDuration = (Math.random() * 4 + 7) + 's'; 
+                flower.style.fontSize = (Math.random() * 8 + 12) + 'px';
                 
                 flowerContainer.appendChild(flower);
                 
                 setTimeout(() => {
                     flower.remove();
-                }, 9000);
-            }, extraConfetti ? 180 : 280); 
+                }, 11000);
+            }, 280); 
         }
 
-        // 1. Entrance Screen Action
+        // 1. Entrance Trigger
         startBtn.addEventListener('click', () => {
             bgMusic.volume = 0.8;
             bgMusic.play().catch(e => console.log("Audio play deferred", e));
 
-            startFlowerShower(isAccepted);
+            startFlowerShower();
 
             welcomeScreen.style.opacity = '0';
             setTimeout(() => {
@@ -605,40 +515,23 @@
             }, 1200);
         });
 
-        // 2. Open Card (Clicking Cover Face)
-        cardFrontFace.addEventListener('click', () => {
-            if (!isFlipped) {
-                theCard.classList.add('is-flipped');
-                isFlipped = true;
-            }
+        // 2. Card Unseal (Open Card)
+        theCard.addEventListener('click', (e) => {
+            if (e.target.id === 'home-btn' || hasFlipped) return; 
+            hasFlipped = true;
+            theCard.classList.add('is-flipped');
         });
 
-        // 3. Claim Crown Action
-        acceptBtn.addEventListener('click', () => {
-            localStorage.setItem('sanyukta_accepted', 'true');
-            markAsAcceptedUI();
-            startFlowerShower(true);
-            
-            if (history.pushState) {
-                const newurl = window.location.protocol + "//" + window.location.host + window.location.pathname + '?status=accepted';
-                window.history.pushState({path:newurl}, '', newurl);
-            }
-
-            cardBackBody.scrollTo({
-                top: cardBackBody.scrollHeight,
-                behavior: 'smooth'
-            });
-        });
-
-        // 4. Close Cover (Explicit Event Trigger)
+        // 3. Return to Cover Front Page (Unflips Card)
         homeBtn.addEventListener('click', (e) => {
-            e.preventDefault();
+            e.stopPropagation(); 
+            
             theCard.classList.remove('is-flipped');
-            isFlipped = false;
+            hasFlipped = false;
 
             setTimeout(() => {
-                cardBackBody.scrollTop = 0;
-            }, 600);
+                cardBackFace.scrollTop = 0;
+            }, 800);
         });
     </script>
 </body>
