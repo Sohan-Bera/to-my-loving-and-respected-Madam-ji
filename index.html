@@ -155,7 +155,6 @@
 
         /* 3D SCENE & RESPONSIVE CARD */
         .scene {
-            /* Reduced size slightly for cleaner proportions */
             width: min(76vw, 250px);
             height: min(108vw, 370px);
             perspective: 1000px;
@@ -191,10 +190,10 @@
             transform: translateZ(0); /* Fixes mobile backface flickering */
         }
 
-        /* 1st Face: Cover Front (Totally Transparent & Crisp Text) */
+        /* 1st Face: Cover Front */
         .card-front {
-            background: transparent; /* Totally transparent */
-            -webkit-backdrop-filter: none; /* Blur completely removed */
+            background: transparent;
+            -webkit-backdrop-filter: none;
             backdrop-filter: none;
             padding: 18px 14px;
             display: flex;
@@ -276,7 +275,7 @@
             pointer-events: auto;
         }
 
-        /* Touch-optimized Scrollable Container */
+        /* Scrollable Container with Side Scrollbar */
         .card-back-scroll {
             flex: 1;
             width: 100%;
@@ -284,11 +283,26 @@
             padding: 20px 16px 8px 16px;
             -webkit-overflow-scrolling: touch; /* Native iOS Momentum Scroll */
             touch-action: pan-y;
-            scrollbar-width: none;
+            scrollbar-width: thin;
+            scrollbar-color: var(--sunset-gold) rgba(255, 255, 255, 0.08);
         }
 
+        /* Webkit custom scrollbar styling for WebKit/Blink browsers */
         .card-back-scroll::-webkit-scrollbar {
-            display: none;
+            display: block;
+            width: 4px;
+        }
+
+        .card-back-scroll::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 4px;
+            margin: 12px 0;
+        }
+
+        .card-back-scroll::-webkit-scrollbar-thumb {
+            background: var(--sunset-gold);
+            border-radius: 4px;
+            box-shadow: 0 0 6px rgba(230, 184, 125, 0.8);
         }
 
         .confession-text {
@@ -420,7 +434,7 @@
                 <span class="corner-ornament top-left">✧</span>
                 <div class="to-name">Just for you SANYUKTA</div>
                 <div class="subtitle">I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.</div>
-                <div class="instruction">Tap to Unseal,read and scroll</div>
+                <div class="instruction">Tap to Unseal my confession</div>
                 <span class="corner-ornament bottom-right">✧</span>
             </div>
 
@@ -428,14 +442,14 @@
             <div class="card-face card-back">
                 <div class="card-back-scroll" id="card-scroll-container">
                     <div class="confession-text">
-                        <span class="line">Sanyukta, I may not be perfect but I will try my best to always keep you happy</span>
+                        <span class="line">Sanyukta, I may not be your first love not perfect but I will try my best to always keep you happy</span>
                         <span class="line">But this sacred connection we have is something I want to protect with everything I have.</span>
                         <span class="line">I’ve built this quiet beautiful garden right here on the left side of my chest, and I just want to fill it with your happiness.</span>
-                        <span class="line">Instead, since today is Girlfriend’s Day, I just wanted to leave this here for you to ask privately...</span>
+                        <span class="line">Instead, since today is Girlfriend’s Day, I just wanted to leave this here for you to ask...</span>
                         
                         <div class="proposal-box">
                             <span class="proposal-symbol">♛</span>
-                            <span class="proposal-line">Will you be my one and only princess,<br>my true ladylove?</span>
+                            <span class="proposal-line">Will you be my one and only princess?<br>The one and only ladylove </span>
                         </div>
                     </div>
                 </div>
@@ -467,11 +481,10 @@
         // Mobile-Throttled Particle Engine
         function startFlowerShower() {
             flowerContainer.style.opacity = '1';
-            const elements = ['🪷', '✨', '💖', '💫']; 
+            const elements = ['🪷', '✨', '💖', '🍁']; 
 
             if (showerInterval) return;
 
-            // Frequency adjusted to preserve 60fps on lower-end mobile processors
             showerInterval = setInterval(() => {
                 const flower = document.createElement('div');
                 flower.className = 'flower';
