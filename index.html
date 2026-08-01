@@ -113,7 +113,7 @@
 
         .novel-title {
             font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(20px, 5.5vw, 26px);
+            font-size: clamp(22px, 6vw, 30px);
             font-weight: 700;
             margin-bottom: 16px;
             color: var(--sunset-gold);
@@ -125,7 +125,7 @@
         #welcome-screen p {
             color: var(--parchment-ink);
             opacity: 0.8;
-            font-size: clamp(13px, 3.5vw, 15px);
+            font-size: clamp(14px, 4vw, 16px);
             margin-bottom: 32px;
             font-style: italic;
         }
@@ -153,10 +153,10 @@
             box-shadow: 0 0 12px rgba(217, 154, 91, 0.6);
         }
 
-        /* 3D SCENE & RESPONSIVE CARD */
+        /* 3D SCENE & RESPONSIVE CARD - INCREASED DIMENSIONS */
         .scene {
-            width: min(76vw, 250px);
-            height: min(108vw, 370px);
+            width: min(88vw, 360px);
+            height: min(130vw, 540px);
             perspective: 1000px;
             opacity: 0;
             transition: opacity 1.2s ease-in-out;
@@ -184,7 +184,7 @@
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
             border: 1.5px solid var(--glass-border);
-            border-radius: 16px;
+            border-radius: 18px;
             box-shadow: var(--rose-shadow);
             overflow: hidden;
             transform: translateZ(0); /* Fixes mobile backface flickering */
@@ -195,7 +195,7 @@
             background: transparent;
             -webkit-backdrop-filter: none;
             backdrop-filter: none;
-            padding: 18px 14px;
+            padding: 24px 20px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -207,57 +207,57 @@
         .card-front::before {
             content: '';
             position: absolute;
-            inset: 8px;
+            inset: 10px;
             border: 1px dashed rgba(230, 184, 125, 0.55);
-            border-radius: 10px;
+            border-radius: 12px;
             pointer-events: none;
         }
 
         .corner-ornament {
             position: absolute;
             color: var(--sunset-gold);
-            font-size: 14px;
+            font-size: 16px;
             text-shadow: 0 0 8px var(--rose-gold-glow), 0 2px 4px rgba(0, 0, 0, 0.9);
         }
-        .top-left { top: 14px; left: 14px; }
-        .bottom-right { bottom: 14px; right: 14px; }
+        .top-left { top: 18px; left: 18px; }
+        .bottom-right { bottom: 18px; right: 18px; }
 
         .to-name {
             font-family: 'Cinzel Decorative', serif;
-            font-size: clamp(15px, 4.2vw, 18px);
+            font-size: clamp(18px, 5.2vw, 22px);
             font-weight: 700;
             color: var(--parchment-ink);
             text-shadow: 0 0 12px rgba(230, 184, 125, 0.9), 0 2px 8px rgba(0, 0, 0, 0.95);
             z-index: 2;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 14px;
         }
 
         .card-front .subtitle {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(12px, 3.4vw, 14px);
+            font-size: clamp(15px, 4.2vw, 17.5px);
             font-style: italic;
             color: var(--parchment-ink);
             z-index: 2;
             text-align: center;
-            line-height: 1.4;
+            line-height: 1.5;
             text-shadow: 0 2px 6px rgba(0, 0, 0, 0.95), 0 0 10px rgba(0, 0, 0, 0.8);
             opacity: 0.95;
-            padding: 0 4px;
+            padding: 0 6px;
         }
 
         .instruction {
             position: absolute;
-            bottom: 18px;
+            bottom: 22px;
             font-family: 'Playfair Display', serif;
-            font-size: 10.5px;
+            font-size: 12px;
             font-style: italic;
             color: #ffffff;
             z-index: 2;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
             animation: pulseGlow 2s infinite ease-in-out;
-            text-shadow: 0 0 6px rgba(230, 184, 125, 0.8), 0 2px 4px rgba(0, 0, 0, 0.95);
+            text-shadow: 0 0 10px rgba(230, 184, 125, 0.9), 0 2px 6px rgba(0, 0, 0, 0.95);
         }
 
         /* 2nd Face: Letter Back */
@@ -280,7 +280,7 @@
             flex: 1;
             width: 100%;
             overflow-y: auto;
-            padding: 20px 16px 8px 16px;
+            padding: 24px 20px 12px 20px;
             -webkit-overflow-scrolling: touch; /* Native iOS Momentum Scroll */
             touch-action: pan-y;
             scrollbar-width: thin;
@@ -307,61 +307,64 @@
 
         .confession-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(13.5px, 3.6vw, 15px);
-            line-height: 1.6;
+            font-size: clamp(16px, 4.5vw, 18.5px);
+            line-height: 1.65;
             color: var(--parchment-ink);
-            text-align: left;
+            text-align: justify;
+            text-justify: inter-word;
+            hyphens: auto;
+            -webkit-hyphens: auto;
             font-weight: 500;
         }
 
         .line {
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: block;
             letter-spacing: 0.2px;
         }
 
         .line:first-child::first-letter {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 26px;
+            font-size: 32px;
             color: var(--sunset-gold);
             float: left;
             line-height: 0.8;
-            margin-right: 6px;
+            margin-right: 8px;
             margin-top: 2px;
             text-shadow: 0 0 8px rgba(230, 184, 125, 0.7);
         }
 
         .proposal-box {
-            margin: 14px 0 8px 0;
-            padding: 10px;
+            margin: 18px 0 10px 0;
+            padding: 14px;
             background: linear-gradient(135deg, rgba(230, 184, 125, 0.15) 0%, rgba(244, 195, 178, 0.08) 100%);
             border: 1px solid rgba(230, 184, 125, 0.4);
-            border-radius: 10px;
+            border-radius: 12px;
             text-align: center;
         }
 
         .proposal-line {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(12.5px, 3.4vw, 14px);
+            font-size: clamp(15px, 4.2vw, 17px);
             font-style: italic;
             font-weight: 600;
             color: #ffe8d6;
-            line-height: 1.5;
+            line-height: 1.55;
             display: block;
             text-shadow: 0 0 8px rgba(230, 184, 125, 0.8);
         }
 
         .proposal-symbol {
             display: block;
-            font-size: 14px;
+            font-size: 16px;
             color: var(--sunset-gold);
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         /* Fixed Button Area */
         .home-btn-container {
             width: 100%;
-            padding: 8px 14px 14px 14px;
+            padding: 10px 16px 16px 16px;
             display: flex;
             justify-content: center;
             background: linear-gradient(to top, rgba(24, 12, 15, 1) 80%, rgba(24, 12, 15, 0));
@@ -369,11 +372,11 @@
         }
 
         #home-btn {
-            min-height: 42px; /* Accessible Touch Target */
-            min-width: 130px;
-            padding: 8px 20px;
+            min-height: 44px; /* Accessible Touch Target */
+            min-width: 140px;
+            padding: 10px 24px;
             font-family: 'Cinzel Decorative', serif;
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--parchment-ink);
             background: linear-gradient(135deg, rgba(217, 154, 91, 0.45) 0%, rgba(60, 25, 30, 0.85) 100%);
@@ -398,7 +401,7 @@
             width: 100%;
             text-align: center;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            font-size: 8.5px;
+            font-size: 9px;
             color: rgba(255, 255, 255, 0.45);
             z-index: 2;
             pointer-events: none;
@@ -433,8 +436,7 @@
             <div class="card-face card-front" id="card-front-tap">
                 <span class="corner-ornament top-left">✧</span>
                 <div class="to-name">Just for you, SANYUKTA</div>
-                <div class="subtitle">I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.<br>I don't want to copy like
-                others, but I wanted to tell this in my own style.</div>
+                <div class="subtitle">I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.<br>I don't want to copy like others, but I wanted to tell this in my own style.</div>
                 <div class="instruction">Tap to Unseal my confession</div>
                 <span class="corner-ornament bottom-right">✧</span>
             </div>
@@ -443,10 +445,9 @@
             <div class="card-face card-back">
                 <div class="card-back-scroll" id="card-scroll-container">
                     <div class="confession-text">
-                        <span class="line"> Dear Sanyukta, I know I may not be the first chapter in your story, nor am I a man without flaws—but every single day, I promise to choose your happiness above all else.</span>
-                        <span class="line">What we share isn’t ordinary; it’s a sacred sanctuary, a gentle quiet in a noisy world that I intend to guard with every breath I take. Deep within me, on the left side of my chest, 
-                            lies a hidden garden—a place born solely from your presence, blooming only when you are near.</span>
-                       <span class="line">Since today is Girlfriend’s Day, I wanted to step out of the shadows of unspoken words asking you privately and leaving my heart in your hands...</span>
+                        <span class="line">Dear Sanyukta, I know I may not be the first chapter in your story, nor am I a man without flaws—but every single day, I promise to choose your happiness above all else.</span>
+                        <span class="line">What we share isn’t ordinary; it’s a sacred sanctuary, a gentle quiet in a noisy world that I intend to guard with every breath I take. Deep within me, on the left side of my chest, lies a hidden garden—a place born solely from your presence, blooming only when you are near.</span>
+                        <span class="line">Since today is Girlfriend’s Day, I wanted to step out of the shadows of unspoken words asking you privately and leaving my heart in your hands...</span>
                         
                         <div class="proposal-box">
                             <span class="proposal-symbol">♛</span>
@@ -463,7 +464,7 @@
         </div>
     </div>
 
-    <footer>&copy 2026 Non-commercial. Designed & Developed by Sohan. Dedicated to Sanyukta. Privacy maintained. Made with ❤️</footer>
+    <footer>&copy; 2026 Non-commercial. Designed & Developed by Sohan. Dedicated to Sanyukta. Privacy maintained. Made with ❤️</footer>
 
     <script>
         const welcomeScreen = document.getElementById('welcome-screen');
