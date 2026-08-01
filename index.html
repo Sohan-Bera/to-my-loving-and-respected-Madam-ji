@@ -8,14 +8,13 @@
     <style>
         /* 
          * 🌹 ROMANTIC SUNSET ROSES THEME 🌹
-         * Position & Size Adjusted for Clear Backdrop Visibility
+         * Fully Transparent Front Card Face Design
          */
         :root {
             --sunset-gold: #e6b87d;
             --rose-gold-glow: #f4c3b2;
             --warm-amber: #d99a5b;
-            --glass-card-bg: rgba(28, 16, 18, 0.42);
-            --glass-border: rgba(230, 184, 125, 0.4);
+            --glass-border: rgba(230, 184, 125, 0.55);
             --parchment-ink: #fff6ee;
             --rose-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
@@ -48,14 +47,12 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(35, 18, 12, 0.15) 0%, rgba(15, 6, 8, 0.65) 100%);
+            background: radial-gradient(circle at center, rgba(35, 18, 12, 0.1) 0%, rgba(15, 6, 8, 0.55) 100%);
             z-index: 0;
             pointer-events: none;
         }
 
-        /* 
-         * 60FPS GPU-ACCELERATED FLOWER SHOWER
-         */
+        /* 60FPS GPU-ACCELERATED FLOWER SHOWER */
         #flower-container {
             position: fixed;
             top: 0;
@@ -155,14 +152,14 @@
             transition: opacity 1.5s ease-in-out;
             cursor: pointer;
             z-index: 10;
-            margin-top: 100px; /* Shifted down so artwork faces remain unblocked */
+            margin-top: 100px; /* Positions card nicely framed over rose garden */
         }
 
         .card {
             width: 100%;
             height: 100%;
             position: relative;
-            transform: scale(0.78); /* Scaled down slightly for better background balance */
+            transform: scale(0.78);
             transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
             transform-style: preserve-3d;
             will-change: transform;
@@ -173,7 +170,7 @@
             cursor: default;
         }
 
-        /* Glass Face Styling */
+        /* Glass Face Base */
         .card-face {
             position: absolute;
             width: 100%;
@@ -184,18 +181,16 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            
-            background: var(--glass-card-bg);
-            -webkit-backdrop-filter: blur(14px) saturate(160%);
-            backdrop-filter: blur(14px) saturate(160%);
-            
             border: 1.5px solid var(--glass-border);
             border-radius: 16px;
-            box-shadow: var(--rose-shadow), inset 0 0 20px rgba(230, 184, 125, 0.15);
+            box-shadow: var(--rose-shadow);
         }
 
+        /* 1st Face: Fully Transparent Cover */
         .card-front {
-            background: linear-gradient(135deg, rgba(40, 20, 25, 0.45) 0%, rgba(15, 6, 10, 0.6) 100%);
+            background: transparent;
+            -webkit-backdrop-filter: none;
+            backdrop-filter: none;
             padding: 0 16px;
         }
 
@@ -203,7 +198,7 @@
             content: '';
             position: absolute;
             inset: 8px;
-            border: 1px dashed rgba(230, 184, 125, 0.35);
+            border: 1px dashed rgba(230, 184, 125, 0.45);
             border-radius: 10px;
             pointer-events: none;
         }
@@ -212,7 +207,7 @@
             position: absolute;
             color: var(--sunset-gold);
             font-size: 16px;
-            text-shadow: 0 0 8px var(--rose-gold-glow);
+            text-shadow: 0 0 8px var(--rose-gold-glow), 0 2px 4px rgba(0,0,0,0.8);
         }
         .top-left { top: 14px; left: 14px; }
         .bottom-right { bottom: 14px; right: 14px; }
@@ -222,13 +217,12 @@
             font-size: 22px;
             font-weight: 700;
             color: var(--parchment-ink);
-            text-shadow: 0 0 14px rgba(230, 184, 125, 0.7), 0 2px 4px rgba(0,0,0,0.9);
+            text-shadow: 0 0 16px rgba(230, 184, 125, 0.9), 0 2px 8px rgba(0, 0, 0, 0.95);
             z-index: 2;
             letter-spacing: 1px;
             text-align: center;
         }
 
-        /* Added Subtitle under "For Sanyukta" */
         .subtitle {
             font-family: 'Playfair Display', serif;
             font-size: 11px;
@@ -237,9 +231,9 @@
             z-index: 2;
             margin-top: 8px;
             text-align: center;
-            opacity: 0.9;
             letter-spacing: 0.5px;
             line-height: 1.3;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
         }
 
         .instruction {
@@ -252,11 +246,15 @@
             z-index: 2;
             letter-spacing: 1px;
             animation: pulseGlow 2.5s infinite;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.95);
         }
 
-        /* Back Face Content & Scroll Area */
+        /* Back Face Content (Letter view keeps dark glass for legibility) */
         .card-back {
             transform: rotateY(180deg);
+            background: rgba(28, 16, 18, 0.65);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            backdrop-filter: blur(16px) saturate(180%);
             padding: 20px 16px 18px 16px;
             justify-content: flex-start;
             overflow-y: auto;
@@ -276,7 +274,7 @@
             text-align: left;
             width: 100%;
             font-weight: 600;
-            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.95);
         }
 
         .line {
@@ -311,11 +309,11 @@
             font-size: 10px;
             font-weight: 700;
             color: var(--parchment-ink);
-            background: linear-gradient(135deg, rgba(217, 154, 91, 0.3) 0%, rgba(60, 25, 30, 0.6) 100%);
+            background: linear-gradient(135deg, rgba(217, 154, 91, 0.35) 0%, rgba(60, 25, 30, 0.7) 100%);
             border: 1px solid var(--sunset-gold);
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), inset 0 0 10px rgba(230, 184, 125, 0.2);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(230, 184, 125, 0.2);
             transition: all 0.3s ease;
             text-transform: uppercase;
             letter-spacing: 1.5px;
@@ -327,8 +325,8 @@
         }
 
         @keyframes pulseGlow {
-            0%, 100% { opacity: 0.4; text-shadow: 0 0 2px rgba(230, 184, 125, 0.2); }
-            50% { opacity: 1; text-shadow: 0 0 10px rgba(230, 184, 125, 0.8); }
+            0%, 100% { opacity: 0.5; text-shadow: 0 0 2px rgba(230, 184, 125, 0.3); }
+            50% { opacity: 1; text-shadow: 0 0 12px rgba(230, 184, 125, 0.9); }
         }
 
         @media screen and (max-width: 380px) {
@@ -372,7 +370,7 @@
     <div class="scene" id="card-scene">
         <div class="card" id="the-card">
             
-            <!-- Front Cover Face -->
+            <!-- 1st Face (Fully Transparent Cover) -->
             <div class="card-face card-front">
                 <span class="corner-ornament top-left">✧</span>
                 <div class="to-name">FOR SANYUKTA</div>
@@ -381,7 +379,7 @@
                 <span class="corner-ornament bottom-right">✧</span>
             </div>
 
-            <!-- Back Face (Full Letter + Close Cover Button) -->
+            <!-- 2nd Face (Full Letter + Close Cover Button) -->
             <div class="card-face card-back" id="card-back-face">
                 <div class="confession-text">
                     <span class="line">Sanyukta... I know words written on a screen might not carry the exact weight of a voice, but I needed you to feel every piece of this.</span>
