@@ -8,16 +8,16 @@
     <style>
         /* 
          * 🌹 ROMANTIC SUNSET ROSES THEME 🌹
-         * Optimized GPU-Accelerated Animation Pipeline
+         * Position & Size Adjusted for Clear Backdrop Visibility
          */
         :root {
             --sunset-gold: #e6b87d;
             --rose-gold-glow: #f4c3b2;
             --warm-amber: #d99a5b;
-            --glass-card-bg: rgba(28, 16, 18, 0.48);
-            --glass-border: rgba(230, 184, 125, 0.45);
+            --glass-card-bg: rgba(28, 16, 18, 0.42);
+            --glass-border: rgba(230, 184, 125, 0.4);
             --parchment-ink: #fff6ee;
-            --rose-shadow: 0 0 25px rgba(217, 154, 91, 0.3);
+            --rose-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
         * {
@@ -48,7 +48,7 @@
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at center, rgba(35, 18, 12, 0.25) 0%, rgba(15, 6, 8, 0.75) 100%);
+            background: radial-gradient(circle at center, rgba(35, 18, 12, 0.15) 0%, rgba(15, 6, 8, 0.65) 100%);
             z-index: 0;
             pointer-events: none;
         }
@@ -148,27 +148,28 @@
 
         /* 3D GLASS CARD & SCENE */
         .scene {
-            width: 270px;
-            height: 380px;
+            width: 250px;
+            height: 350px;
             perspective: 1200px;
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
             cursor: pointer;
             z-index: 10;
+            margin-top: 100px; /* Shifted down so artwork faces remain unblocked */
         }
 
         .card {
             width: 100%;
             height: 100%;
             position: relative;
-            transform: scale(0.85);
+            transform: scale(0.78); /* Scaled down slightly for better background balance */
             transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
             transform-style: preserve-3d;
             will-change: transform;
         }
 
         .card.is-flipped {
-            transform: rotateY(-180deg) scale(1.22);
+            transform: rotateY(-180deg) scale(1.15);
             cursor: default;
         }
 
@@ -185,8 +186,8 @@
             align-items: center;
             
             background: var(--glass-card-bg);
-            -webkit-backdrop-filter: blur(16px) saturate(180%);
-            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(14px) saturate(160%);
+            backdrop-filter: blur(14px) saturate(160%);
             
             border: 1.5px solid var(--glass-border);
             border-radius: 16px;
@@ -194,7 +195,8 @@
         }
 
         .card-front {
-            background: linear-gradient(135deg, rgba(40, 20, 25, 0.55) 0%, rgba(15, 6, 10, 0.7) 100%);
+            background: linear-gradient(135deg, rgba(40, 20, 25, 0.45) 0%, rgba(15, 6, 10, 0.6) 100%);
+            padding: 0 16px;
         }
 
         .card-front::before {
@@ -217,7 +219,7 @@
 
         .to-name {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--parchment-ink);
             text-shadow: 0 0 14px rgba(230, 184, 125, 0.7), 0 2px 4px rgba(0,0,0,0.9);
@@ -226,11 +228,25 @@
             text-align: center;
         }
 
+        /* Added Subtitle under "For Sanyukta" */
+        .subtitle {
+            font-family: 'Playfair Display', serif;
+            font-size: 11px;
+            font-style: italic;
+            color: var(--rose-gold-glow);
+            z-index: 2;
+            margin-top: 8px;
+            text-align: center;
+            opacity: 0.9;
+            letter-spacing: 0.5px;
+            line-height: 1.3;
+        }
+
         .instruction {
             position: absolute;
-            bottom: 30px;
+            bottom: 24px;
             font-family: 'Playfair Display', serif;
-            font-size: 13px;
+            font-size: 12px;
             font-style: italic;
             color: var(--sunset-gold);
             z-index: 2;
@@ -241,7 +257,7 @@
         /* Back Face Content & Scroll Area */
         .card-back {
             transform: rotateY(180deg);
-            padding: 24px 18px 20px 18px;
+            padding: 20px 16px 18px 16px;
             justify-content: flex-start;
             overflow-y: auto;
             scrollbar-width: none;
@@ -254,8 +270,8 @@
 
         .confession-text {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 15px;
-            line-height: 1.65;
+            font-size: 14.5px;
+            line-height: 1.6;
             color: var(--parchment-ink);
             text-align: left;
             width: 100%;
@@ -271,7 +287,7 @@
 
         .line:first-child::first-letter {
             font-family: 'Cinzel Decorative', serif;
-            font-size: 32px;
+            font-size: 30px;
             color: var(--sunset-gold);
             float: left;
             line-height: 0.8;
@@ -285,14 +301,14 @@
             width: 100%;
             display: flex;
             justify-content: center;
-            margin-top: 22px;
-            margin-bottom: 10px;
+            margin-top: 18px;
+            margin-bottom: 8px;
         }
 
         #home-btn {
-            padding: 10px 24px;
+            padding: 8px 20px;
             font-family: 'Cinzel Decorative', serif;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
             color: var(--parchment-ink);
             background: linear-gradient(135deg, rgba(217, 154, 91, 0.3) 0%, rgba(60, 25, 30, 0.6) 100%);
@@ -317,17 +333,21 @@
 
         @media screen and (max-width: 380px) {
             .scene {
-                width: 240px;
-                height: 350px;
+                width: 230px;
+                height: 330px;
+                margin-top: 110px;
+            }
+            .card {
+                transform: scale(0.72);
             }
             .card.is-flipped {
-                transform: rotateY(-180deg) scale(1.18);
-            }
-            .novel-title {
-                font-size: 20px;
+                transform: rotateY(-180deg) scale(1.12);
             }
             .to-name {
-                font-size: 22px;
+                font-size: 19px;
+            }
+            .subtitle {
+                font-size: 10px;
             }
             .confession-text {
                 font-size: 13.5px;
@@ -355,7 +375,8 @@
             <!-- Front Cover Face -->
             <div class="card-face card-front">
                 <span class="corner-ornament top-left">✧</span>
-                <div class="to-name">For Sanyukta</div>
+                <div class="to-name">FOR SANYUKTA</div>
+                <div class="subtitle">A gentle reminder of how much you mean to me</div>
                 <div class="instruction">Tap to Unseal</div>
                 <span class="corner-ornament bottom-right">✧</span>
             </div>
@@ -396,7 +417,7 @@
         let hasFlipped = false;
         let showerInterval = null;
 
-        // Ultra-Smooth Petals Engine
+        // Smooth Petals Engine
         function startFlowerShower() {
             flowerContainer.style.opacity = '1';
             const elements = ['🌹', '✨', '🥀', '✧', '✦']; 
@@ -420,12 +441,11 @@
             }, 280); 
         }
 
-        // 1. Entrance Trigger (Flowers start immediately here)
+        // 1. Entrance Trigger
         startBtn.addEventListener('click', () => {
             bgMusic.volume = 0.8;
             bgMusic.play().catch(e => console.log("Audio play deferred", e));
 
-            // Start flower shower right as user enters website
             startFlowerShower();
 
             welcomeScreen.style.opacity = '0';
@@ -444,12 +464,11 @@
 
         // 3. Return to Cover Front Page (Unflips Card)
         homeBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Stop click bubbling
+            e.stopPropagation(); 
             
             theCard.classList.remove('is-flipped');
             hasFlipped = false;
 
-            // Reset letter scroll position back to top
             setTimeout(() => {
                 cardBackFace.scrollTop = 0;
             }, 800);
